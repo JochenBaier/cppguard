@@ -1,0 +1,3 @@
+EXPORTS
+run_c_test
+run_cpp_test

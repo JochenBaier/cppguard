@@ -1,0 +1,227 @@
+#Licensed to the Apache Software Foundation (ASF) under one
+#or more contributor license agreements.  See the NOTICE file
+#distributed with this work for additional information
+#regarding copyright ownership.  The ASF licenses this file
+#to you under the Apache License, Version 2.0 (the
+#"License"); you may not use this file except in compliance
+#with the License.  You may obtain a copy of the License at
+#
+#  http://www.apache.org/licenses/LICENSE-2.0
+#
+#Unless required by applicable law or agreed to in writing,
+#software distributed under the License is distributed on an
+#"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#KIND, either express or implied.  See the License for the
+#specific language governing permissions and limitations
+#under the License.  
+
+set (api_tests
+test_cs_t1_double_leave_exit_66
+test_cs_leave_other_thread_exit_66
+test_bad_thread_sanitzer_example_exit_66
+test_cs_t1_a_b_t2_b_a_overlap_exit_66
+test_cs_t1_a_b_t2_b_a_no_overlap_exit_66
+test_cs_t1_a_b_t2_b_and_more_exit_66
+test_bad_cs_100t_10cs_bulk_exit_66
+test_cs_t1_a_b_t2_b_a_no_overlap_halt_on_error_false_exit_66
+test_cs_t1_a_b_t2_b_a_overlap_recurse_exit_66
+test_cs_try_enter_t1_a_b_t2_b_a_overlap_exit_66
+test_bad_cs_2t_10cs_bulk_exit_66
+test_c_file_thread_sanitzer_example_exit_66
+test_deadlock_in_header_exit_66
+test_c_file_shared_lib_thread_sanitzer_example_exit_66
+test_c_file_dyn_lib_thread_sanitzer_example_exit_66
+test_cpp_file_dyn_lib_thread_sanitzer_example_exit_66
+test_1t_2t2_exit_66
+test_cs_too_many_locks_perh_thread_exit_66
+test_cs_t1_a_b_t2_b_a_large_callstack_exit_66
+test_abseil_test_1_exit_66
+test_abseil_test_1000_large_exit_66
+test_dining_philosophers_exit_66
+test_delete_cs_before_leave_exit_66
+test_delete_cs_in_other_thread_before_leave_exit_66
+test_cs_leave_other_thread_cs_only_leave_disabled_exit_66
+test_cs_leave_cs_which_the_thread_does_not_hold_exit_66
+test_cs_t1_a_a_exit_0
+test_ok_cs_t1_a_b_exit_0
+test_cs_t1_a_b_a_b_exit_0
+test_cs_t1_a_b_b_a_exit_0
+test_ok_cs_t1_a_b_bulk_exit_0
+test_ok_cs_t1_a_b_bulk2_exit_0
+test_ok_cs_t1_a_b_t2_a_b_no_overlap_exit_0
+test_ok_cs_t1_a_b_t2_a_b_may_overlap_exit_0
+test_ok_cs_100t_10cs_bulk_exit_0
+test_cs_t1_a_b_t2_b_a_no_overlap_cs_ignored_exit_0
+test_cs_t1_a_b_t2_b_a_no_overlap_cs_ignored_both_threads_exit_0
+test_cs_t1_a_b_t2_b_a_no_overlap_cs_ignored_both_threads_single_exit_0
+test_cs_t1_double_leave_cs_disabled_exit_0
+test_cs_leave_other_thread_cs_disabled_exit_0
+test_t1_aaa_bbb_ccc_recure_exit_0
+test_t1_abc_bbb_abc_recure_exit_0
+test_ok_cs_t1_a_b_t2_a_b_recurse_exit_0
+test_ok_cs_tryenter_critical_section_exit_0
+test_cs_try_enter_t1_a_b_t2_b_a_overlap_tryenter_on_second_exit_0
+test_cs_delete_without_use_exit_0
+test_cs_delete_with_use_exit_0
+test_cs_mass_delete_exit_0
+test_cs_perf_test_exit_0
+test_runtime_options_exit_0
+test_std_mutex_t1_a_lock_recurse_bad_exit_66
+test_std_mutex_t1_a_unlock_double_bad_exit_66
+test_std_mutex_unlock_other_thread_exit_66
+test_std_mutex_t1_a_b_t2_b_a_overlap_exit_66
+test_std_mutex_t1_a_b_t2_b_a_maybe_overlap_exit_66
+test_std_mutex_t1_a_b_t2_b_a_no_overlap_exit_66
+test_std_mutex_t1_a_b_t2_b_and_more_exit_66
+test_std_mutex_100t_10_m_bulk_exit_66
+test_lock_guard_std_mutex_t1_a_lock_recurse_bad_exit_66
+test_lock_guard_std_mutex_t1_a_b_t2_b_a_maybe_overlap_exit_66
+test_std_mutex_try_lock_t1_a_b_t2_b_a_overlap_exit_66
+test_mutex_t1_a_b_c_d_e_a_exit_66
+test_lock_guard_std_mutex_t1_a_b_t2_b_a_no_overlap_exit_66
+test_lock_guard_std_mutex_t1_a_b_t2_b_a_large_callstack_exit_66
+test_std_mutex_delete_before_unlock_exit_66
+test_std_mutex_t1_a_exit_0
+test_std_mutex_t1_a_b_exit_0
+test_condition_variable_exit_0
+test_lock_guard_std_mutex_t1_a_exit_0
+test_std_lock_guard_std_mutex_t1_a_b_exit_0
+test_unique_lock_std_mutex_t1_a_exit_0
+test_std_unique_std_mutex_t1_a_b_exit_0
+test_std_mutex_try_lock_t1_a_b_t2_b_a_overlap_try_on_second_exit_0
+test_std_mutex_t1_a_b_t2_b_a_no_overlap_ignored_exit_0
+test_lock_guard_std_mutex_t1_a_b_t2_b_a_no_overlap_ignore_exit_0
+test_std_mutex_try_lock_second_time_exit_0
+test_std_mutex_try_lock_t1_a_b_t2_b_a_no_overlap_exit_0
+test_from_abseil_source_test_large_exit_0
+test_std_mutex_delete_without_use_exit_0
+test_std_mutex_delete_with_use_exit_0
+test_std_mutex_mass_delete_exit_0
+test_std_recursive_mutex_t1_a_unlock_double_bad_exit_66
+test_std_recursive_mutex_unlock_other_thread_exit_66
+test_std_recursive_mutex_t1_a_b_t2_b_a_overlap_exit_66
+test_std_recursive_mutex_t1_a_b_t2_b_a_maybe_overlap_exit_66
+test_std_recursive_mutex_t1_a_b_t2_b_a_no_overlap_exit_66
+test_std_recursive_mutex_t1_a_b_t2_b_and_more_exit_66
+test_std_recursive_mutex_100t_10_m_bulk_exit_66
+test_lock_guard_std_recursive_mutex_t1_a_b_t2_b_a_maybe_overlap_exit_66
+test_lock_guard_recursive__t1_a_b_t2_b_a_maybe_overlap_exit_66
+test_std_recursive_mutex_delete_before_unlock_exit_66
+test_std_recursive_mutex_t1_a_exit_0
+test_std_recursive_mutex_t1_a_b_exit_0
+test_std_mutex_t1_a_lock_recurse_good_exit_0
+test_lock_guard_std_recursive_mutex_t1_a_exit_0
+test_std_lock_guard_std_recursive_mutex_t1_a_b_exit_0
+test_lock_guard_std_mutex_t1_a_lock_recurse_exit_0
+test_std_recursive_mutex_delete_without_use_exit_0
+test_std_recursive_mutex_delete_with_use_exit_0
+test_std_recursive_mutex_mass_delete_exit_0
+test_cs_t1_duration_6_sec_bad_exit_66
+test_cs_t1_missing_leave_bad_exit_66
+test_cs_2t_misssing_leave_bad_exit_66
+test_ok_cs_t1_40_bad_exit_66
+test_cs_t1_too_long_duration_exit_66
+test_cs_misssing_leave_n_exit_66
+test_cs_multi_thread_bad_exit_66
+test_mutex_t1_duration_6_sec_bad_exit_66
+test_lock_guard_mutex_t1_duration_6_sec_ok_exit_66
+test_std_condition_variable_signal_blocked_too_long_exit_66
+test_cs_too_many_waiters_exit_66
+test_cs_t1_duration_1_sec_ok_exit_0
+test_cs_t1_duration_4_sec_ok_exit_0
+test_x_times_cs_t1_duration_1_sec_ok_exit_0
+test_ok_cs_t1_bulk2_ok_exit_0
+test_good_cs_multi_thread_ok_exit_0
+test_mutex_t1_duration_1_sec_ok_exit_0
+test_mutex_t1_duration_4_sec_ok_exit_0
+test_lock_guard_mutex_t1_duration_4_sec_ok_exit_0
+test_std_condition_variable_duration_10_sec_good_exit_0
+test_std_condition_variable_duration_10_sec_with_signal_exit_0
+test_std_condition_variable_signal_short_blocked_exit_0
+ )
+
+foreach (test ${api_tests})
+  if(test MATCHES ".*_exit_66")
+      message( TRACE "Test '${test} WILL_FAIL TRUE" )
+      add_test (NAME ${test} COMMAND cppguard_tests --test-case=${test})
+      set_property(TEST ${test} PROPERTY ENVIRONMENT "CPPGUARD=thread_watchdog_max_duration_sec:5,halt_on_error:1")
+      set_property (TEST ${test} PROPERTY WILL_FAIL TRUE)
+  elseif(test MATCHES ".*_exit_0")
+      message( TRACE "Test '${test} WILL_FAIL FALSE" )
+      add_test (NAME ${test} COMMAND cppguard_tests --test-case=${test})
+      set_property(TEST ${test} PROPERTY ENVIRONMENT "CPPGUARD=thread_watchdog_max_duration_sec:5,halt_on_error:1")
+  else()
+   message( FATAL_ERROR "Test '${test} does not have _exit_0 or _exit_66" )
+  endif()
+
+endforeach()
+
+#FIXME: test more outputs
+
+add_test (NAME static_test COMMAND cppguard_tests)
+set_property(TEST static_test PROPERTY ENVIRONMENT "CPPGUARD_STATIC_TEST_BEFORE_MAIN=true;CPPGUARD=halt_on_error:1")
+set (static_test_output "A cycle in the historical lock ordering graph has been observed")
+set_property (TEST static_test PROPERTY PASS_REGULAR_EXPRESSION "${static_test_output}")
+
+add_test (NAME static_test_dyn_lib COMMAND cppguard_tests)
+set_property(TEST static_test_dyn_lib PROPERTY ENVIRONMENT "CPPGUARD_STATIC_TEST_IN_DLL_BEFORE_MAIN=true;CPPGUARD=halt_on_error:1")
+set_property (TEST static_test_dyn_lib PROPERTY WILL_FAIL TRUE)
+
+unset( ENV{TZ} )
+string( TIMESTAMP currentTime "%Y-%m-%dT%H%M" )
+message( STATUS "currentTime = ${currentTime}" )
+
+add_test (NAME test_deadlock_output_to_file COMMAND cppguard_tests --test-case=test_cs_t1_a_b_t2_b_and_more_exit_66)
+set_property(TEST test_deadlock_output_to_file PROPERTY ENVIRONMENT "CPPGUARD=halt_on_error:1,fail_process_in_case_of_error:0,log:${CMAKE_CURRENT_BINARY_DIR}/cppguard_output_${currentTime}.txt")
+set_property (TEST test_deadlock_output_to_file PROPERTY WILL_FAIL TRUE)
+add_test(NAME test_deadlock_output_to_file_check_file_exists COMMAND ${CMAKE_COMMAND} -E cat ${CMAKE_CURRENT_BINARY_DIR}/cppguard_output_${currentTime}.txt)
+set_tests_properties(test_deadlock_output_to_file_check_file_exists PROPERTIES DEPENDS test_deadlock_output_to_file)
+
+set (test_deadlock_output_to_stdout_passRegex "CppGuard: Potential deadlock at mutex:")
+add_test (NAME test_deadlock_output_to_stdout COMMAND cppguard_tests --test-case=test_bad_thread_sanitzer_example_exit_66)
+set_property (TEST test_deadlock_output_to_stdout PROPERTY WILL_FAIL TRUE)
+set_property(TEST test_deadlock_output_to_stdout PROPERTY ENVIRONMENT "CPPGUARD=halt_on_error:1,fail_process_in_case_of_error:0,log:stdout")
+set_property (TEST test_deadlock_output_to_stdout PROPERTY PASS_REGULAR_EXPRESSION "${test_deadlock_output_to_stdout_passRegex}")
+
+set (test_deadlock_output_to_stdout_summary_passRegex "Potential deadlocks found:  Yes")
+add_test (NAME test_deadlock_output_to_stdout_summary COMMAND cppguard_tests --test-case=test_bad_thread_sanitzer_example_exit_66)
+set_property(TEST test_deadlock_output_to_stdout_summary PROPERTY ENVIRONMENT "CPPGUARD=halt_on_error:0,fail_process_in_case_of_error:1,log:stdout")
+set_property (TEST test_deadlock_output_to_stdout_summary PROPERTY PASS_REGULAR_EXPRESSION "${test_deadlock_output_to_stdout_summary_passRegex}")
+
+add_test (NAME test_deadlock_output_to_disabled COMMAND cppguard_tests --test-case=test_bad_thread_sanitzer_example_exit_66)
+set_property (TEST test_deadlock_output_to_disabled PROPERTY WILL_FAIL TRUE)
+set_property(TEST test_deadlock_output_to_disabled PROPERTY ENVIRONMENT "CPPGUARD=halt_on_error:1,fail_process_in_case_of_error:0,log:disabled")
+
+add_test (NAME test_deadlock_found_exit_code_0_from_env COMMAND cppguard_tests --test-case=test_cs_t1_a_b_t2_b_a_no_overlap_exit_66)
+set_property(TEST test_deadlock_found_exit_code_0_from_env PROPERTY ENVIRONMENT "CPPGUARD=halt_on_error:1,fail_process_in_case_of_error:0,exit_code:0")
+set (test_deadlock_found_exit_code_0_from_env_output "CppGuard: Process will be terminated with exit code '0' due to potential deadlock. Use option 'halt_on_error:0' to continue on error")
+set_property (TEST test_deadlock_found_exit_code_0_from_env PROPERTY PASS_REGULAR_EXPRESSION "${test_deadlock_found_exit_code_0_from_env_output}")
+
+add_test (NAME test_deadlock_found_main_exit_code_0_from_env COMMAND cppguard_tests --test-case=test_cs_t1_a_b_t2_b_a_no_overlap_exit_66)
+set_property(TEST test_deadlock_found_main_exit_code_0_from_env PROPERTY ENVIRONMENT "CPPGUARD=halt_on_error:0,fail_process_in_case_of_error:1,exit_code:0")
+set (test_deadlock_found_main_exit_code_0_from_env_output "Potential deadlocks found:  Yes")
+set_property (TEST test_deadlock_found_main_exit_code_0_from_env PROPERTY PASS_REGULAR_EXPRESSION "${test_deadlock_found_main_exit_code_0_from_env_output}")
+
+add_test (NAME test_thread_watchdog_many_too_long_durations_but_ignore_errors COMMAND cppguard_tests --test-case=test_thread_watchdog_many_too_long_durations_but_ignore_errors)
+set_property(TEST test_thread_watchdog_many_too_long_durations_but_ignore_errors PROPERTY ENVIRONMENT "CPPGUARD=halt_on_error:0,thread_watchdog_max_duration_sec:2")
+set (test_thread_watchdog_many_too_long_durations_but_ignore_errors_output "holds a lock since 2 seconds")
+set_property (TEST test_thread_watchdog_many_too_long_durations_but_ignore_errors PROPERTY PASS_REGULAR_EXPRESSION "${test_thread_watchdog_many_too_long_durations_but_ignore_errors_output}")
+
+add_test (NAME test_cs_statistis_wrong_init_delete_counter COMMAND cppguard_tests --test-case=test_cs_statistis_wrong_init_delete_counter)
+set_property(TEST test_cs_statistis_wrong_init_delete_counter PROPERTY ENVIRONMENT "CPPGUARD=fail_process_in_case_of_error:1")
+set (test_cs_statistis_wrong_init_delete_counter_output "CriticalSection statistics: Initialized: 2000, Deleted: 1999")
+set_property (TEST test_cs_statistis_wrong_init_delete_counter PROPERTY PASS_REGULAR_EXPRESSION "${test_cs_statistis_wrong_init_delete_counter_output}")
+
+add_test (NAME test_cs_too_many_locks_perh_thread_200 COMMAND cppguard_tests --test-case=test_cs_too_many_locks_perh_thread_200)
+set (test_cs_too_many_locks_perh_thread_200_output "already holds 20 locks. Max number of hold locks per thread reached")
+set_property (TEST test_cs_too_many_locks_perh_thread_200 PROPERTY PASS_REGULAR_EXPRESSION "${test_cs_too_many_locks_perh_thread_200_output}")
+
+add_test (NAME test_cs_too_many_locks_perh_thread_200_2 COMMAND cppguard_tests --test-case=test_cs_too_many_locks_perh_thread_200)
+set_property (TEST test_cs_too_many_locks_perh_thread_200_2 PROPERTY WILL_FAIL TRUE)
+
+add_test (NAME test_cs_too_many_locks_perh_thread_1000_but_continue_on_error COMMAND cppguard_tests --test-case=test_cs_too_many_locks_perh_thread_1000)
+set_property(TEST test_cs_too_many_locks_perh_thread_1000_but_continue_on_error PROPERTY ENVIRONMENT "CPPGUARD=halt_on_error:0")
+set (test_cs_too_many_locks_perh_thread_1000_but_continue_on_error_output "Errors found:               Yes")
+set_property (TEST test_cs_too_many_locks_perh_thread_1000_but_continue_on_error PROPERTY PASS_REGULAR_EXPRESSION "${test_cs_too_many_locks_perh_thread_1000_but_continue_on_error_output}")
+
+

@@ -1,0 +1,15 @@
+EXPORTS
+cppguard_set_options
+cppguard_increase_ignore_counter
+cppguard_mtx_lock
+cppguard_mtx_unlock
+cppguard_mtx_trylock
+cppguard_init_in_situ
+cppguard_mtx_destroy_in_situ
+cppguard_cnd_wait
+cppguard_cnd_timedwait
+cppguard_initialize_critical_section
+cppguard_enter_critical_section
+cppguard_leave_critical_section
+cppguard_tryenter_critical_section
+cppguard_delete_critical_section

@@ -1,0 +1,19 @@
+CppGuard
+Copyright 2023 Jochen Baier <email@jochen-baier.de>
+
+
+This files contains code derived from 'Abseil - C++ Common Libraries'
+https://github.com/abseil/abseil-cpp, Copyright 2017 The Abseil Authors
+ * graphcycles.cc/graphcycles.h 
+ * low_level_alloc.cc/low_level_alloc.h
+ * stacktrace.cc/stacktrace.h
+ * thread_history_helper.cpp/thread_history_helper.hpp
+
+This software uses:
+ * fmtlib: https://github.com/fmtlib/fmt (MIT license)
+ * pystring: https://github.com/imageworks/pystring (BSD 3-Clause "New" or "Revised" License)
+ * debugbreak: https://github.com/scottt/debugbreak/blob/master (BSD 2-Clause "Simplified" License)
+ * https://github.com/github/gitignore (Creative Commons Zero v1.0 Universal)
+ * doctest: https://github.com/doctest/doctest (MIT License)
+
+
