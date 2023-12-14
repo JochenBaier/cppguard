@@ -21,12 +21,12 @@ target_link_libraries(target_to_test cppguard::cppguard cppguard::auto_include)
 
 ##### Prerequisites
 
-- The target to test: Executable or DLL with access to source code created with Visual Studio in C or C++, all C++ versions supported.
+- The target to test: Executable or DLL with access to source code created with Visual Studio 2019 or 2022 in C or C++, all C++ versions supported.
   
 - C-projects: C++ support has to be enabled:  project(project_name C **CXX**)
   
 - To compile CppGuard: 
-  - Visual Studio with C+14  support (tested with 19/22) 
+  - Visual Studio 2019 or 2022 with C++14 support 
   - CMake >=3.15
 
 - Use same compiler and platform toolset for CppGuard and the test target
