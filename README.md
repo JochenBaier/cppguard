@@ -1,8 +1,17 @@
 ### Purpose
 
-**CppGuard** is developer tool for **testing** C++  applications made with Visual Studio **for deadlocks and wrong lock usage.** I can be used manually and within a CI system. CppGuard consists of the DLL *cppguard.dll* and the header *cppguard.hpp*.
+**CppGuard** is developer tool for **testing** C++  applications made with Visual Studio **for deadlocks and wrong lock usage.** I can be used manually and within a CI system. CppGuard consists of the DLL *cppguard.dll* and the header *cppguard.h*.
 
 CppGuard uses the [deadlock detection algorithm](https://abseil.io/docs/cpp/guides/synchronization#deadlock-detection) from C++ library Abseil. This algorithm will detect a potential deadlock even if the executed program does not actually deadlock. It maintains an acquired-before graph and checks for cycles in this graph. The underlying graph algorithm is described [here](https://whileydave.com/2020/12/19/dynamic-cycle-detection-for-lock-ordering). There is no relationship between the Abseil project and CppGuard.  
+
+##### Advantages:
+
+- Test applications that cannot be tested on Linux with ThreadSanitizer
+- ThreadSanitizer often cannot cover 100% as some program parts are not portable: CppGuard covers this gap
+- Test with the Windows operating system on which the program will later run
+- Test applications that run too slowly with other Windows OS deadlock test tools
+- Test C/C++ DLLs loaded in a Java program ( Java Native Interfaces)
+- Test C/C++ DLLs loaded in a .Net program
 
 ###### Example deadlock detection:
 
@@ -12,13 +21,13 @@ CppGuard uses the [deadlock detection algorithm](https://abseil.io/docs/cpp/guid
 std::mutex a;
 std::mutex b;
 
-//lock order: ab
+//lock order: a -> b
 std::thread t1([&]() {
   const std::lock_guard<std::mutex> lock_a(a);
   const std::lock_guard<std::mutex> lock_b(b);
 });
 
-//lock order: ba
+//lock order: b -> a
 std::thread t2([&]() {
   const std::lock_guard<std::mutex> lock_b(b);
   const std::lock_guard<std::mutex> lock_a(a);
@@ -68,6 +77,7 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.3313
 -  Detect wrong lock usage: Detect locks which are released by threads which do no hold them (from Abseil algorithm)
 -  Lock watchdog: The time a lock is waiting for a lock or holding a lock is monitored and a log or error is created if a maximum time is exceeded
 -  Runs on Windows OS with the native lock APIs of Windows:  Critical Section, std::mutex and std::recursive_mutex
+-  Test C/C++ DLLs loaded in a Java or a .Net  programs
 -  Overhead depends on usage. Pretty good for IO bound applications (e.g.  TCPI/IP based)
 -  Works with Debug, Release and RelWithDebInfo builds
 -  For basic usage no source code changes are needed. Minor changes (minimum 2 lines) to the build system (CMake, or Visual Studio Project) are needed 
@@ -81,7 +91,7 @@ see [Quickstart](docs/Quickstart.md)
 CppGuard provides:
 
 - cppguard.dll: This DLL and has to be linked to the project to test (import library: cppguard.lib)
-- [cppguard.hpp](cppguard/include/cppguard.hpp): This header file is automatically included in all source files using Visual Studio option [Forced Include File](https://learn.microsoft.com/en-us/cpp/build/reference/fi-name-forced-include-file?view=msvc-170).
+- [cppguard.h](cppguard/include/cppguard.h): This header file is automatically included in all source files using Visual Studio option [Forced Include File](https://learn.microsoft.com/en-us/cpp/build/reference/fi-name-forced-include-file?view=msvc-170).
   Macros like *#define EnterCriticalSection(x) cppguard_enter_critical_section(x)* will intercept the lock API call
 
 ### Supported Lock APIs:
