@@ -21,7 +21,7 @@
 
 #include <cassert>
 #include <thread>
-#include "cppguard.hpp"
+#include "cppguard.h"
 
 #define DOCTEST_CONFIG_IMPLEMENT
 #include "doctest.h"

@@ -98,7 +98,7 @@ target_include_directories(cppguard
 
 add_library(cppguard_forced_include INTERFACE)
 if (WIN32)
-target_compile_options(cppguard_forced_include INTERFACE "/FI${CMAKE_CURRENT_LIST_DIR}/include/cppguard.hpp" )
+target_compile_options(cppguard_forced_include INTERFACE "/FI${CMAKE_CURRENT_LIST_DIR}/include/cppguard.h" )
 endif()
 add_library(cppguard::auto_include ALIAS cppguard_forced_include)
 

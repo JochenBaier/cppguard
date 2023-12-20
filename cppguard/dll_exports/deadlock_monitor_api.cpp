@@ -25,7 +25,7 @@
 #include <cassert>
 #include <cstring>
 #include "attributes.hpp"
-#include "cppguard.hpp"
+#include "cppguard.h"
 #include "options_parser.hpp"
 #include "fmt/format.h"
 #include "fmt/std.h"

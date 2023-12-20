@@ -15,7 +15,7 @@
 //specific language governing permissions and limitations
 //under the License.  
 
-#include "cppguard.hpp"
+#include "cppguard.h"
 #include <cassert>
 #include <iostream>
 

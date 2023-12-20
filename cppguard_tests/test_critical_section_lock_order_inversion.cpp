@@ -38,7 +38,7 @@
 #include "../cppguard_tests_dyn_lib/tests_dyn_lib_api.h"
 
 #ifdef __linux__
-#include "cppguard.hpp"
+#include "cppguard.h"
 #include "critical_section_linux.hpp"
 #else
 

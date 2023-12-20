@@ -35,7 +35,7 @@ target_link_libraries(target_to_test cppguard::cppguard cppguard::auto_include)
 ##### CppGuard consists of
 
 - cppguard.dll: needs to be linked to test target (link cppguard.lib)
-- cppguard.hpp: needs to be included in all sources which contains locks, this is automated with '[/FI](https://learn.microsoft.com/en-us/cpp/build/reference/fi-name-forced-include-file?view=msvc-170)' compile option 
+- cppguard.h: needs to be included in all sources which contains locks, this is automated with '[/FI](https://learn.microsoft.com/en-us/cpp/build/reference/fi-name-forced-include-file?view=msvc-170)' compile option 
 
 ##### Getting CppGuard
 
@@ -142,7 +142,7 @@ target_link_libraries(quickstart_example cppguard::cppguard cppguard::auto_inclu
 **cppguard::cppguard**: will link cppguard and adds 'cppguard/include' folder to VS 'Additional included directories'.
 Use this for Exe or DLL targets. If the exe or DLL target does not contain any locks you can omit "cppguard::auto_include"
 
-**cppguard::auto_include**: sets  '[/FI](https://learn.microsoft.com/en-us/cpp/build/reference/fi-name-forced-include-file?view=msvc-170)' compile option with value 'cppguard.hpp'. This option includes 'cppguard.hpp'
+**cppguard::auto_include**: sets  '[/FI](https://learn.microsoft.com/en-us/cpp/build/reference/fi-name-forced-include-file?view=msvc-170)' compile option with value 'cppguard.h'. This option includes 'cppguard.h'
 in all source files of the target. Use this option for all targets which contains locks. This header enables CppGuard to monitor the usage of Locks.
 
 
@@ -162,7 +162,7 @@ cmake --build .  //debug
 Set '[/FI](https://learn.microsoft.com/en-us/cpp/build/reference/fi-name-forced-include-file?view=msvc-170)'  compile option for all targets to test:
 
 ```
-target_compile_options(test_target PRIVATE "/FIpath_to/cppguard/cppguard/include/cppguard.hpp" )
+target_compile_options(test_target PRIVATE "/FIpath_to/cppguard/cppguard/include/cppguard.h" )
 ```
 
 Link cppguard:

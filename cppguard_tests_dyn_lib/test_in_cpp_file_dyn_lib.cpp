@@ -26,7 +26,7 @@
 #endif
 
 #ifdef __linux__
-#include "../cppguard/include/cppguard.hpp"
+#include "../cppguard/include/cppguard.h"
 #include "critical_section_linux.hpp"
 #endif
 
