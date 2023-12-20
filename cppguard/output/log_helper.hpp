@@ -31,6 +31,7 @@ struct runtime_options_t;
 
 namespace log_helper
 {
+void create_options_log_text(const runtime_options_t& p_runtime_options, fmt::memory_buffer& p_out_buffer);
 TM_ATTRIBUTE_NOINLINE void build_deadlock_circle_log_text(const GraphCycles& p_deadlock_graph, void* mu, const uint64_t& mu_id, const uint64_t& other_node_id, fmt::memory_buffer& p_log_string);
 void create_summary(statistics_t& p_statistics, const bool& p_found_deadlocks, const bool& p_other_errors_found, fmt::memory_buffer& p_summary);
 TM_ATTRIBUTE_NOINLINE void build_delete_locked_lock_log_text(const std::thread::id& p_thread_id, const void* mu, fmt::memory_buffer& p_log_string);

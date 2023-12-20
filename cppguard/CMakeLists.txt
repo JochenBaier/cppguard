@@ -19,6 +19,15 @@ cmake_minimum_required(VERSION 3.15)
 project(cppguard)
 set(CMAKE_CXX_STANDARD 14)
 
+
+set(VERSION_MAJOR 0)
+set(VERSION_MINOR 2)
+set(VERSION_BUILD 0)
+set(VERSION_REVISION 0)
+
+configure_file(cppguard_rc.in cppguard.rc @ONLY)
+
+
 set(source_list 
 cppguard.rc
 dl_main.cpp
@@ -72,6 +81,13 @@ if(CPPGUARD_MAX_LOCKS_PER_THREAD)
   else()
   target_compile_definitions(cppguard PRIVATE MAX_LOCKS_PER_THREAD=20)
 endif()
+
+
+target_compile_definitions(cppguard PRIVATE VERSION_MAJOR=${VERSION_MAJOR})
+target_compile_definitions(cppguard PRIVATE VERSION_MINOR=${VERSION_MINOR})
+target_compile_definitions(cppguard PRIVATE VERSION_BUILD=${VERSION_BUILD})
+target_compile_definitions(cppguard PRIVATE VERSION_REVISION=${VERSION_REVISION})
+
 
 foreach(_source IN ITEMS ${_source_list})
     get_filename_component(_source_path "${_source}" PATH)

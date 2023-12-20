@@ -88,10 +88,16 @@ struct loader_t
     if(g_runtime_options.m_log_type.load()!=static_cast<uint8_t>(log_type_t::disabled))
     {
       auto out=fmt::memory_buffer();
-      fmt::format_to(std::back_inserter(out), "=================\n");
-      fmt::format_to(std::back_inserter(out), "CppGuard loaded\n");
-      fmt::format_to(std::back_inserter(out), "=================\n");
+      fmt::format_to(std::back_inserter(out), "========================================\n");
+      fmt::format_to(std::back_inserter(out), "CppGuard loaded [version: '{}.{}.{}.{}']\n", VERSION_MAJOR, VERSION_MINOR, VERSION_BUILD, VERSION_REVISION);
+      fmt::format_to(std::back_inserter(out), "========================================\n");
+
+
+      log_helper::create_options_log_text(g_runtime_options, out);
+
       logger::log_msg(out, g_runtime_options);
+
+
     }
   }
 

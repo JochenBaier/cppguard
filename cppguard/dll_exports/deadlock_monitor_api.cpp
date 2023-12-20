@@ -26,9 +26,11 @@
 #include <cstring>
 #include "attributes.hpp"
 #include "cppguard.h"
+#include "log_helper.hpp"
 #include "options_parser.hpp"
 #include "fmt/format.h"
 #include "fmt/std.h"
+#include "log.hpp"
 
 extern runtime_options_t g_runtime_options;
 extern deadlock_monitor_t* g_deadlock_monitor;
@@ -44,6 +46,14 @@ TM_ATTRIBUTE_VISIBILITY int cppguard_set_options(const char* p_options, char* p_
   try
   {
     parse_options(p_options, g_runtime_options);
+
+    if(g_runtime_options.m_log_type.load()!=static_cast<uint8_t>(log_type_t::disabled))
+    {
+      auto out=fmt::memory_buffer();
+      log_helper::create_options_log_text(g_runtime_options, out);
+      logger::log_msg(out, g_runtime_options);
+    }
+
     return 1;
   } catch(std::invalid_argument& p_ex)
   {

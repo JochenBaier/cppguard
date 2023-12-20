@@ -41,6 +41,30 @@
 
 namespace log_helper
 {
+void create_options_log_text(const runtime_options_t& p_runtime_options, fmt::memory_buffer& p_out_buffer)
+{
+  fmt::format_to(std::back_inserter(p_out_buffer), "\n");
+  fmt::format_to(std::back_inserter(p_out_buffer), "Used CppGuard options:\n");
+  fmt::format_to(std::back_inserter(p_out_buffer), "  halt_on_error: {}\n", p_runtime_options.m_halt_on_error ? "1" : "0");
+  fmt::format_to(std::back_inserter(p_out_buffer), "  fail_process_in_case_of_error: {}\n", p_runtime_options.m_override_process_exit_code_on_error ? "1" : "0");
+  fmt::format_to(std::back_inserter(p_out_buffer), "  thread_watchdog: {}\n", p_runtime_options.m_thread_watchdog_enabled ? "1" : "0");
+  fmt::format_to(std::back_inserter(p_out_buffer), "  thread_watchdog_max_duration_sec: {}\n", p_runtime_options.m_thread_watchdog_max_duration_sec);
+  fmt::format_to(std::back_inserter(p_out_buffer), "  exit_code: {}\n", p_runtime_options.m_exit_code);
+
+  std::string log_option;
+
+  switch(static_cast<log_type_t>(p_runtime_options.m_log_type.load()))
+  {
+  case log_type_t::disabled: log_option="disabled"; break;
+  case log_type_t::to_stderr: log_option="stderr"; break;
+  case log_type_t::to_stdout: log_option="stdout"; break;
+  case log_type_t::to_file: log_option=p_runtime_options.m_log_file; break;
+  }
+
+  fmt::format_to(std::back_inserter(p_out_buffer), "  log: {}\n\n", log_option);
+}
+
+
 void create_summary(statistics_t& p_statistics, const bool& p_found_deadlocks, const bool& p_other_errors_found, fmt::memory_buffer& p_summary)
 {
   const bool critical_section_error=p_statistics.m_initial_critial_section_counter!=p_statistics.m_delete_critial_section_counter;
@@ -69,7 +93,9 @@ std::string construct_hold_locks_string(const std::array<lock_t, MAX_LOCKS_PER_T
 void build_deadlock_circle_log_text(const GraphCycles& p_deadlock_graph, void* mu, const uint64_t& mu_id, const uint64_t& other_node_id, fmt::memory_buffer& p_log_string)
 {
   fmt::format_to(std::back_inserter(p_log_string), "\n\n\n==========================================================================================================\n");
-  fmt::format_to(std::back_inserter(p_log_string), "CppGuard: [Error] Potential deadlock at lock: {}, thread ID: {}.\nLock Call Stack:\n", mu, std::this_thread::get_id());
+  fmt::format_to(std::back_inserter(p_log_string), "CppGuard: [Error] Potential deadlock at lock: {}, thread ID: {}\n", mu, std::this_thread::get_id());
+  fmt::format_to(std::back_inserter(p_log_string), "Hint: Go through all Call Stacks and check which locks are called in inconsistent order\n\n");
+  fmt::format_to(std::back_inserter(p_log_string), "Lock Call Stack:\n");
   save_current_callstack_to_string(p_log_string, 2);
 
   fmt::format_to(std::back_inserter(p_log_string), "\nA cycle in the historical lock ordering graph has been observed:\n");
