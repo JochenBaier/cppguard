@@ -75,16 +75,17 @@ void deadlock_monitor_t::increase_ignore_counter(const unsigned int p_lock_count
   g_ignore_counter_unlock+=p_unlocks_counter;
 }
 
-SynchLocksHeld& deadlock_monitor_t::Synch_GetAllLocks()
+SynchLocksHeld& deadlock_monitor_t::Synch_GetAllLocks(const bool p_monitor_thread)
 {
   if(!g_sync_locks_held)
   {
     g_sync_locks_held=std::make_shared<SynchLocksHeld>();
 
-    thread_local on_thread_delete_t synch_locks_deleter(m_thread_watchdog);
-
-    m_thread_watchdog.add_thread(std::this_thread::get_id(), g_sync_locks_held);
-
+    if(p_monitor_thread)
+    {
+      thread_local on_thread_delete_t synch_locks_deleter(m_thread_watchdog);
+      m_thread_watchdog.add_thread(std::this_thread::get_id(), g_sync_locks_held);
+    }
   }
 
   return *g_sync_locks_held.get();
@@ -99,7 +100,7 @@ void deadlock_monitor_t::dlc_deadlock_check_before_lock(void* mu, void** p_hold_
     return;
   }
 
-  SynchLocksHeld& all_locks=Synch_GetAllLocks();
+  SynchLocksHeld& all_locks=Synch_GetAllLocks(true);
   if(all_locks.n>=MAX_LOCKS_PER_THREAD)
   {
     auto log_text=fmt::memory_buffer();
@@ -185,7 +186,7 @@ void deadlock_monitor_t::dlc_deadlock_check_after_lock(void* mu)
 
     uint64_t id=0;
     GetGraphId(mu, id);
-    SynchLocksHeld& held_locks=Synch_GetAllLocks();
+    SynchLocksHeld& held_locks=Synch_GetAllLocks(false);
 
     const bool update_history_ok=thread_history_helper::update_lock_history_after_lock(mu, id, held_locks, m_runtime_options);
     if(!update_history_ok)
@@ -217,7 +218,7 @@ void deadlock_monitor_t::dlc_deadlock_check_before_try_lock(void* mu, void** p_h
 
   m_deadlock_graph.GetId(mu, p_id);
 
-  SynchLocksHeld& all_locks=Synch_GetAllLocks();
+  SynchLocksHeld& all_locks=Synch_GetAllLocks(true);
   *p_hold_locks=&all_locks;
 
   if(all_locks.n==0)
@@ -237,7 +238,7 @@ void deadlock_monitor_t::dlc_deadlock_delete_lock(void* mu)
     std::lock_guard<cs_mutex_t> lock(m_deadlock_graph_mutex);
     m_deadlock_graph.RemoveNode(mu);
 
-    const SynchLocksHeld& all_locks=Synch_GetAllLocks();
+    const SynchLocksHeld& all_locks=Synch_GetAllLocks(false);
 
     const size_t n=static_cast<size_t>(all_locks.n);
     for(size_t i=0; i<n; ++i)
@@ -263,11 +264,11 @@ void deadlock_monitor_t::dlc_deadlock_delete_lock(void* mu)
 void deadlock_monitor_t::cppguard_cnd_wait(const void* mu)
 {
   UNUSED(mu)
-    assert(mu);
-  SynchLocksHeld& all_locks=Synch_GetAllLocks();
+  assert(mu);
+  SynchLocksHeld& all_locks=Synch_GetAllLocks(false);
   assert(all_locks.m_lock_start_time_point>0);
 
-  //disable thread watchdog for mutex used by std::condition_variable
+  //'disable' thread watchdog for mutex used by std::condition_variable
   all_locks.m_lock_start_time_point=(std::numeric_limits<uint64_t>::max)();
 }
 

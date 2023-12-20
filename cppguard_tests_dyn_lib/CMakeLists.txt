@@ -17,14 +17,13 @@
 
 cmake_minimum_required(VERSION 3.10)
 
-set(_source_list
+set(source_list
 dl_main.cpp
 test_in_cpp_file_dyn_lib.hpp
 tests_dyn_lib_api.c
 test_in_c_file_dyn_lib.c
 test_in_c_file_dyn_lib.h
 test_in_cpp_file_dyn_lib.cpp
-tests_dyn_lib.def
 )
 
 if (WIN32)
@@ -40,9 +39,8 @@ critical_section_linux.cpp
 )
 endif()
 
-add_library(cppguard_tests_dyn_lib SHARED ${_source_list})
+add_library(cppguard_tests_dyn_lib SHARED ${source_list})
 
-target_link_libraries(cppguard_tests_dyn_lib cppguard)
 
 if (WIN32)
 target_link_libraries(cppguard_tests_dyn_lib cppguard::cppguard cppguard::auto_include)

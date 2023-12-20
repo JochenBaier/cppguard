@@ -5,3 +5,4 @@
  * debugbreak: https://github.com/scottt/debugbreak/blob/master (BSD 2-Clause "Simplified" License)
  * https://github.com/github/gitignore (Creative Commons Zero v1.0 Universal)
  * doctest: https://github.com/doctest/doctest (MIT License)
+ * argh: https://github.com/adishavit/argh

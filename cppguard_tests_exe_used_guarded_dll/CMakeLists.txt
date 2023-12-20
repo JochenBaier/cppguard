@@ -16,31 +16,11 @@
 #under the License.  
 
 cmake_minimum_required(VERSION 3.15)
+project(cppguard_tests_exe_used_guarded_dll)
 
-project(cppguard-distribution)
+add_executable(cppguard_tests_exe_used_guarded_dll main.cpp) 
 
-set(CMAKE_CXX_STANDARD 14)
-
-if (WIN32)
-set (CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
-set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
-endif()
-
-include(CTest)
-
-add_subdirectory(cppguard)
-add_subdirectory(cppguard_tests)
-
-if (WIN32)
-add_subdirectory(quickstart_example)
-add_subdirectory(cppguard_tests_static_lib)
-add_subdirectory(cppguard_tests_dyn_lib)
-add_subdirectory(cppguard_tests_exe_used_guarded_dll)
-add_subdirectory(cppguard_tests_guarded_dyn_lib)
-endif()
-
-
-
+target_link_libraries(cppguard_tests_exe_used_guarded_dll cppguard_tests_guarded_dyn_lib)
 
 
 

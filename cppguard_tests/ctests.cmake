@@ -225,3 +225,11 @@ set (test_cs_too_many_locks_perh_thread_1000_but_continue_on_error_output "Error
 set_property (TEST test_cs_too_many_locks_perh_thread_1000_but_continue_on_error PROPERTY PASS_REGULAR_EXPRESSION "${test_cs_too_many_locks_perh_thread_1000_but_continue_on_error_output}")
 
 
+add_test (NAME test_cppguard_tests_exe_used_guarded_dll_good COMMAND cppguard_tests_exe_used_guarded_dll --good)
+
+add_test (NAME test_cppguard_tests_exe_used_guarded_dll_bad COMMAND cppguard_tests_exe_used_guarded_dll --bad)
+set_property (TEST test_cppguard_tests_exe_used_guarded_dll_bad PROPERTY WILL_FAIL TRUE)
+set_property(TEST test_cppguard_tests_exe_used_guarded_dll_bad PROPERTY ENVIRONMENT "CPPGUARD=halt_on_error:1")
+
+
+

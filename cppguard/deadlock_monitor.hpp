@@ -57,7 +57,7 @@ private:
     m_deadlock_graph.GetId(mu, p_id);
   }
 
-  SynchLocksHeld& Synch_GetAllLocks();
+  SynchLocksHeld& Synch_GetAllLocks(const bool p_monitor_thread);
 
   runtime_options_t& m_runtime_options;
   GraphCycles m_deadlock_graph;
