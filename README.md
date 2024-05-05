@@ -1,3 +1,5 @@
+**CppGuard is know part of https://github.com/JochenBaier/BugInsight**
+
 ### Purpose
 
 **CppGuard** is developer tool for **testing** C++  applications made with Visual Studio **for deadlocks and wrong lock usage.** I can be used manually and within a CI system. CppGuard consists of the DLL *cppguard.dll* and the header *cppguard.h*.
