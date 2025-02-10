@@ -1,4 +1,4 @@
-**CppGuard is know part of https://github.com/JochenBaier/BugInsight**
+**CppGuard is now part of https://github.com/JochenBaier/BugInsight**
 
 ### Purpose
 
